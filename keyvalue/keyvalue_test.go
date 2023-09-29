@@ -90,3 +90,23 @@ func TestLoadKeyValuesFromFile(t *testing.T) {
 		assert.ElementsMatch(t, tc.keyvalues, kvs)
 	}
 }
+
+func TestPrettyPrint(t *testing.T) {
+	kvs := []KeyValue{
+		{"this-is-null", nil}, {"this-is-number", 123.0}, {"this-is-boolean", true},
+		{"a:a", "aa"}, {"a:b:a", "aba"},
+		{"top-level", "top-level-value"},
+		{"compound:key", "compound-value"},
+		{"b:a", "ba"}, {"b:b:a", "bba"},
+		{"delete-me", "base value"}}
+	if m, err := MapFromKeyValues(kvs); err != nil {
+		panic(err)
+	} else {
+		fmt.Printf("%v\n", m)
+		if s, err := PrettyPrint(m); err != nil {
+			panic(err)
+		} else {
+			fmt.Println(s)
+		}
+	}
+}
