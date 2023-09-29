@@ -6,8 +6,6 @@ import (
 	"log"
 	"os"
 	"strings"
-
-	"golang.org/x/exp/slices"
 )
 
 type KeyValue struct {
@@ -47,8 +45,8 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 }
 
 func GetKeyValuesJson(kvs []KeyValue) string {
-	keys := getKeys(kvs)
-	slices.Sort(keys)
+	// keys := getKeys(kvs)
+	// slices.Sort(keys)
 
 	m := make(map[string]interface{})
 	for _, kv := range kvs {
