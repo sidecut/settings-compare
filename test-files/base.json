@@ -17,5 +17,6 @@
   "this-is-null": null,
   "this-is-empty": {},
   "this-is-boolean": true,
-  "this-is-number": 123
+  "this-is-number": 123,
+  "empty": {}
 }
