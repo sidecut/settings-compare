@@ -1,10 +1,9 @@
-package main
+package keyvalue
 
 import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	. "settings-compare/keyvalue"
 )
 
 func TestNormalizeToJson_Simple(t *testing.T) {
