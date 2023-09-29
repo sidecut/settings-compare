@@ -13,5 +13,9 @@
       "a": "bba"
     }
   },
-  "delete-me": "base value"
+  "delete-me": "base value",
+  "this-is-null": null,
+  "this-is-empty": {},
+  "this-is-boolean": true,
+  "this-is-number": 123
 }

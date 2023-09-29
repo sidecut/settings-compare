@@ -63,8 +63,9 @@ func TestLoadKeyValuesFromFile(t *testing.T) {
 		keycount  int
 		keyvalues []KeyValue
 	}{
-		{"../test-files/base.json", 7,
+		{"../test-files/base.json", 10,
 			[]KeyValue{
+				{"this-is-null", nil}, {"this-is-number", 123.0}, {"this-is-boolean", true},
 				{"a:a", "aa"}, {"a:b:a", "aba"},
 				{"top-level", "top-level-value"},
 				{"compound:key", "compound-value"},
