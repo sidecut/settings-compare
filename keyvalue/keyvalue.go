@@ -36,6 +36,8 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 		case string:
 			// log.Printf("key:%s\tvalue:%s\n", k, v)
 			keyValues = append(keyValues, KeyValue{prefix + k, v})
+		case nil:
+			keyValues = append(keyValues, KeyValue{prefix + k, v})
 		default:
 			// log.Printf("key:%s\t***value is an object, presumably a map\n", k)
 			childKeyValues := GetKeyValues(v.(map[string]interface{}), prefix+k+":")

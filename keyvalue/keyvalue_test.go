@@ -70,6 +70,12 @@ func TestLoadKeyValuesFromFile(t *testing.T) {
 				{"compound:key", "compound-value"},
 				{"b:a", "ba"}, {"b:b:a", "bba"},
 				{"delete-me", "base value"}}},
+		{"../test-files/base.override.json", 6,
+			[]KeyValue{
+				{"top-level", "overridden-value"},
+				{"compound:key", "compound-value"},
+				{"b:a", "bleah"}, {"b:c:d", "new-nested-value"}, {"b:c:e", "e"},
+				{"delete-me", nil}}},
 	}
 
 	for _, tc := range cases {
