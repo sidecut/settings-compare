@@ -4,17 +4,14 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
-	"os"
 
 	kv "settings-compare/keyvalue"
 
 	"github.com/spf13/cobra"
 )
 
-// diffCmd represents the diff command
 var diffCmd = &cobra.Command{
 	Use:   "diff",
 	Short: "Diff two json settings files, outputting the overrides found in the second file",
@@ -27,28 +24,12 @@ i.e. only news settings and changed settings will be output.`,
 			panic("Two file names required")
 		}
 
-		file1 := args[0]
-		file2 := args[1]
-
-		map1 := make(map[string]interface{})
-		map2 := make(map[string]interface{})
-
-		// Read file1 into map1
-		file1Bytes, err := os.ReadFile(file1)
+		// Read files
+		map1, err := kv.ReadJsonMapFromFile(args[0])
 		if err != nil {
 			panic(err)
 		}
-		err = json.Unmarshal(file1Bytes, &map1)
-		if err != nil {
-			panic(err)
-		}
-
-		// Read file2 into map2
-		file2Bytes, err := os.ReadFile(file2)
-		if err != nil {
-			panic(err)
-		}
-		err = json.Unmarshal(file2Bytes, &map2)
+		map2, err := kv.ReadJsonMapFromFile(args[1])
 		if err != nil {
 			panic(err)
 		}

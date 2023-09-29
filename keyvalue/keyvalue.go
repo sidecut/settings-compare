@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 
 	"golang.org/x/exp/slices"
@@ -12,6 +13,19 @@ import (
 type KeyValue struct {
 	Key   string
 	Value interface{}
+}
+
+func ReadJsonMapFromFile(fname string) (map[string]interface{}, error) {
+	file1Bytes, err := os.ReadFile(fname)
+	if err != nil {
+		return nil, err
+	}
+	m := make(map[string]interface{})
+	err = json.Unmarshal(file1Bytes, &m)
+	if err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
