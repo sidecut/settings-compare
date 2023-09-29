@@ -5,7 +5,7 @@
       "a": "aba"
     }
   },
-  "top-level": "top-level",
+  "top-level": "top-level-value",
   "compound:key": "compound-value",
   "b": {
     "a": "ba",

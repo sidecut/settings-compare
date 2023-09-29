@@ -35,10 +35,10 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 		switch v.(type) {
 		case string:
 			// log.Printf("key:%s\tvalue:%s\n", k, v)
-			keyValues = append(keyValues, KeyValue{k, v})
+			keyValues = append(keyValues, KeyValue{prefix + k, v})
 		default:
 			// log.Printf("key:%s\t***value is an object, presumably a map\n", k)
-			childKeyValues := GetKeyValues(v.(map[string]interface{}), k+":")
+			childKeyValues := GetKeyValues(v.(map[string]interface{}), prefix+k+":")
 			keyValues = append(keyValues, childKeyValues...)
 		}
 	}
@@ -114,7 +114,7 @@ func putIntoMap(kv KeyValue, m map[string]interface{}) error {
 	return nil
 }
 
-func PrettyPrint(m map[string]interface{}) (string, error) {
+func PrettyPrint[T any](m T) (string, error) {
 	b, err := json.MarshalIndent(m, "", "  ")
 	if err != nil {
 		return "", err

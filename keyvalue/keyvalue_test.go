@@ -1,6 +1,7 @@
 package keyvalue
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -54,4 +55,37 @@ func TestNormalizeToJson_0Keys(t *testing.T) {
 	assert.Nil(t, err)
 
 	assert.Equal(t, 0, len(m), "Should have 0 keys")
+}
+
+func TestLoadKeyValuesFromFile(t *testing.T) {
+	cases := []struct {
+		filename  string
+		keycount  int
+		keyvalues []KeyValue
+	}{
+		{"../test-files/base.json", 7,
+			[]KeyValue{
+				{"a:a", "aa"}, {"a:b:a", "aba"},
+				{"top-level", "top-level-value"},
+				{"compound:key", "compound-value"},
+				{"b:a", "ba"}, {"b:b:a", "bba"},
+				{"delete-me", "base value"}}},
+	}
+
+	for _, tc := range cases {
+		m, err := ReadJsonMapFromFile(tc.filename)
+
+		assert.Nil(t, err)
+
+		kvs := GetKeyValues(m, "")
+
+		s, err := PrettyPrint(kvs)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf("%v\n", s)
+
+		assert.Equalf(t, tc.keycount, len(kvs), "Expected %v, got %v", tc.keycount, len(kvs))
+		assert.ElementsMatch(t, tc.keyvalues, kvs)
+	}
 }
