@@ -86,12 +86,6 @@ func TestLoadKeyValuesFromFile(t *testing.T) {
 
 		kvs := GetKeyValues(m, "")
 
-		s, err := PrettyPrint(kvs)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf("%v\n", s)
-
 		assert.Equalf(t, tc.keycount, len(kvs), "Expected %v, got %v", tc.keycount, len(kvs))
 		assert.ElementsMatch(t, tc.keyvalues, kvs)
 	}
