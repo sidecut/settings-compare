@@ -49,13 +49,13 @@ i.e. only news settings and changed settings will be output.`,
 				if map1[k2] == nil {
 					// Key not in base file
 					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, map1[k2], v2)
-					diffs = append(diffs, kv.KeyValue{k2, v2})
+					diffs = append(diffs, kv.KeyValue{Key: k2, Value: v2})
 				} else if v2 == nil {
 					// 	fmt.Printf("key2:%s\tvalue1:%s\n", k2, map1[k2])
 				} else {
 					// Also overridden key
 					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, map1[k2], v2)
-					diffs = append(diffs, kv.KeyValue{k2, v2})
+					diffs = append(diffs, kv.KeyValue{Key: k2, Value: v2})
 				}
 			}
 		}
