@@ -71,10 +71,8 @@ func getKeys(kvs []KeyValue) []string {
 	return keys
 }
 
-func MapFromKeyValues(kvs []KeyValue, m map[string]interface{}) (map[string]interface{}, error) {
-	if m == nil {
-		m = make(map[string]interface{})
-	}
+func MapFromKeyValues(kvs []KeyValue) (map[string]interface{}, error) {
+	m := make(map[string]interface{})
 	for _, kv := range kvs {
 		if err := putIntoMap(kv, m); err != nil {
 			return nil, err

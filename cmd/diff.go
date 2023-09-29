@@ -64,7 +64,7 @@ i.e. only news settings and changed settings will be output.`,
 		println(kv.GetKeyValuesJson(diffs))
 
 		println("\nNormalized JSON:")
-		mNormal, err := kv.MapFromKeyValues(diffs, nil)
+		mNormal, err := kv.MapFromKeyValues(diffs)
 		if err != nil {
 			panic(err)
 		}
