@@ -1,7 +1,6 @@
 package keyvalue
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -96,17 +95,40 @@ func TestPrettyPrint(t *testing.T) {
 		{"this-is-null", nil}, {"this-is-number", 123.0}, {"this-is-boolean", true},
 		{"a:a", "aa"}, {"a:b:a", "aba"},
 		{"top-level", "top-level-value"},
+		// {"empty-map", map[string]interface{}{}},
 		{"compound:key", "compound-value"},
 		{"b:a", "ba"}, {"b:b:a", "bba"},
 		{"delete-me", "base value"}}
 	if m, err := MapFromKeyValues(kvs); err != nil {
 		panic(err)
 	} else {
-		fmt.Printf("%v\n", m)
+		// fmt.Printf("%v\n", m)
 		if s, err := PrettyPrint(m); err != nil {
 			panic(err)
 		} else {
-			fmt.Println(s)
+			// fmt.Println(s)
+			assert.Equal(t, s, `{
+  "a": {
+    "a": "aa",
+    "b": {
+      "a": "aba"
+    }
+  },
+  "b": {
+    "a": "ba",
+    "b": {
+      "a": "bba"
+    }
+  },
+  "compound": {
+    "key": "compound-value"
+  },
+  "delete-me": "base value",
+  "this-is-boolean": true,
+  "this-is-null": null,
+  "this-is-number": 123,
+  "top-level": "top-level-value"
+}`)
 		}
 	}
 }
