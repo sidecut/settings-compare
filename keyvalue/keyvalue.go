@@ -1,4 +1,4 @@
-package main
+package keyvalue
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ type KeyValue struct {
 	Value interface{}
 }
 
-func getKeyValues(m map[string]interface{}, prefix string) []KeyValue {
+func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 	keyValues := []KeyValue{}
 
 	for k, v := range m {
@@ -24,7 +24,7 @@ func getKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 			keyValues = append(keyValues, KeyValue{k, v})
 		default:
 			// log.Printf("key:%s\t***value is an object, presumably a map\n", k)
-			childKeyValues := getKeyValues(v.(map[string]interface{}), k+":")
+			childKeyValues := GetKeyValues(v.(map[string]interface{}), k+":")
 			keyValues = append(keyValues, childKeyValues...)
 		}
 	}
@@ -57,7 +57,7 @@ func getKeys(kvs []KeyValue) []string {
 	return keys
 }
 
-func mapFromKeyValues(kvs []KeyValue, m map[string]interface{}) (map[string]interface{}, error) {
+func MapFromKeyValues(kvs []KeyValue, m map[string]interface{}) (map[string]interface{}, error) {
 	if m == nil {
 		m = make(map[string]interface{})
 	}
