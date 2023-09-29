@@ -1,0 +1,12 @@
+{
+  "top-level": "overridden-value",
+  "compound:key": "compound-value",
+  "b": {
+    "a": "bleah",
+    "c": {
+      "d": "new-nested-value",
+      "e": "e"
+    }
+  },
+  "delete-me": null
+}

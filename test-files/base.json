@@ -1,0 +1,17 @@
+{
+  "a": {
+    "a": "aa",
+    "b": {
+      "a": "aba"
+    }
+  },
+  "top-level": "top-level",
+  "compound:key": "compound-value",
+  "b": {
+    "a": "ba",
+    "b": {
+      "a": "bba"
+    }
+  },
+  "delete-me": "base value"
+}
