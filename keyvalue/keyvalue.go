@@ -32,7 +32,7 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 	return keyValues
 }
 
-func getKeyValuesJson(kvs []KeyValue) string {
+func GetKeyValuesJson(kvs []KeyValue) string {
 	keys := getKeys(kvs)
 	slices.Sort(keys)
 
@@ -100,7 +100,7 @@ func putIntoMap(kv KeyValue, m map[string]interface{}) error {
 	return nil
 }
 
-func prettyPrint(m map[string]interface{}) (string, error) {
+func PrettyPrint(m map[string]interface{}) (string, error) {
 	b, err := json.MarshalIndent(m, "", "  ")
 	if err != nil {
 		return "", err
