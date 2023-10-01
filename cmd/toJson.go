@@ -1,11 +1,12 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+
+	kv "settings-compare/keyvalue"
 
 	"github.com/spf13/cobra"
 )
@@ -13,15 +14,30 @@ import (
 // toJsonCmd represents the toJson command
 var toJsonCmd = &cobra.Command{
 	Use:   "tojson",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Convert a file to proper json, i.e. no colons in keys",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("toJson called")
+		if len(args) != 1 {
+			fmt.Println("toJson requires exactly 1 argument")
+			return
+		}
+
+		m, err := kv.ReadJsonMapFromFile(args[0])
+		if err != nil {
+			panic(err)
+		}
+
+		kvs := kv.GetKeyValues(m, "")
+		// log.Println("kvs1:")
+		// println(kv.PrettyPrint(kvs))
+		// println()
+
+		mNormal, err := kv.MapFromKeyValues(kvs)
+		if err != nil {
+			panic(err)
+		}
+		s, _ := kv.PrettyPrint(mNormal)
+		fmt.Printf("%v\n", s)
+
 	},
 }
 
