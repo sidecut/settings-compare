@@ -44,6 +44,18 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 	return keyValues
 }
 
+func GetFlatMap(m map[string]interface{}, prefix string) map[string]interface{} {
+	kvs := GetKeyValues(m, prefix)
+
+	flatmap := make(map[string]interface{})
+	for _, kv := range kvs {
+		flatmap[kv.Key] = kv.Value
+	}
+
+	return flatmap
+
+}
+
 func GetKeyValuesJson(kvs []KeyValue) string {
 	// keys := getKeys(kvs)
 	// slices.Sort(keys)

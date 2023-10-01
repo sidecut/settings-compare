@@ -14,6 +14,7 @@
     }
   },
   "delete-me": "base value",
+  "delete-me-2": "base value 2",
   "this-is-null": null,
   "this-is-empty": {},
   "this-is-boolean": true,

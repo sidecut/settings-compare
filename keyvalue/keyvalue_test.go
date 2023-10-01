@@ -62,20 +62,20 @@ func TestLoadKeyValuesFromFile(t *testing.T) {
 		keycount  int
 		keyvalues []KeyValue
 	}{
-		{"../test-files/base.json", 10,
+		{"../test-files/base.json", 11,
 			[]KeyValue{
 				{"this-is-null", nil}, {"this-is-number", 123.0}, {"this-is-boolean", true},
 				{"a:a", "aa"}, {"a:b:a", "aba"},
 				{"top-level", "top-level-value"},
 				{"compound:key", "compound-value"},
 				{"b:a", "ba"}, {"b:b:a", "bba"},
-				{"delete-me", "base value"}}},
-		{"../test-files/base.override.json", 6,
+				{"delete-me", "base value"}, {"delete-me-2", "base value 2"}}},
+		{"../test-files/base.override.json", 7,
 			[]KeyValue{
 				{"top-level", "overridden-value"},
 				{"compound:key", "compound-value"},
 				{"b:a", "bleah"}, {"b:c:d", "new-nested-value"}, {"b:c:e", "e"},
-				{"delete-me", nil}}},
+				{"delete-me", nil}, {"delete-me-2", ""}}},
 	}
 
 	for _, tc := range cases {

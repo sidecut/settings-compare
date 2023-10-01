@@ -34,27 +34,27 @@ i.e. only news settings and changed settings will be output.`,
 			panic(err)
 		}
 
-		kvs1 := kv.GetKeyValues(map1, "")
-		kvs2 := kv.GetKeyValues(map2, "")
+		flatmap1 := kv.GetFlatMap(map1, "")
+		flatmap2 := kv.GetFlatMap(map2, "")
 		log.Println("kvs1:")
-		println(kv.GetKeyValuesJson(kvs1))
+		println(kv.PrettyPrint(flatmap1))
 		log.Println("kvs2:")
-		println(kv.GetKeyValuesJson(kvs2))
+		println(kv.PrettyPrint(flatmap2))
 
 		// Compare map1 and map2
 		println("\nComparing map1 and map2")
 		diffs := []kv.KeyValue{}
-		for k2, v2 := range map2 {
-			if map1[k2] != v2 {
-				if map1[k2] == nil {
+		for k2, v2 := range flatmap2 {
+			if flatmap1[k2] != v2 {
+				if flatmap1[k2] == nil {
 					// Key not in base file
-					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, map1[k2], v2)
+					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, flatmap1[k2], v2)
 					diffs = append(diffs, kv.KeyValue{Key: k2, Value: v2})
 				} else if v2 == nil {
 					// 	fmt.Printf("key2:%s\tvalue1:%s\n", k2, map1[k2])
 				} else {
 					// Also overridden key
-					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, map1[k2], v2)
+					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, flatmap1[k2], v2)
 					diffs = append(diffs, kv.KeyValue{Key: k2, Value: v2})
 				}
 			}
