@@ -73,13 +73,13 @@ func GetKeyValuesJson(kvs []KeyValue) string {
 	return string(jsonBytes)
 }
 
-func getKeys(kvs []KeyValue) []string {
-	keys := make([]string, len(kvs))
-	for i, kv := range kvs {
-		keys[i] = kv.Key
-	}
-	return keys
-}
+// func getKeys(kvs []KeyValue) []string {
+// 	keys := make([]string, len(kvs))
+// 	for i, kv := range kvs {
+// 		keys[i] = kv.Key
+// 	}
+// 	return keys
+// }
 
 func MapFromKeyValues(kvs []KeyValue) (map[string]interface{}, error) {
 	m := make(map[string]interface{})
