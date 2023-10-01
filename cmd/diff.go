@@ -37,9 +37,18 @@ i.e. only news settings and changed settings will be output.`,
 		flatmap1 := kv.GetFlatMap(map1, "")
 		flatmap2 := kv.GetFlatMap(map2, "")
 		log.Println("kvs1:")
-		println(kv.PrettyPrint(flatmap1))
+		s, err := kv.PrettyPrint(flatmap1)
+		if err != nil {
+			panic(err)
+		}
+		println(s)
+
 		log.Println("kvs2:")
-		println(kv.PrettyPrint(flatmap2))
+		s, err = kv.PrettyPrint(flatmap2)
+		if err != nil {
+			panic(err)
+		}
+		println(s)
 
 		// Compare map1 and map2
 		println("\nComparing map1 and map2")
@@ -67,7 +76,7 @@ i.e. only news settings and changed settings will be output.`,
 			panic(err)
 		}
 		println()
-		s, _ := kv.PrettyPrint(mNormal)
+		s, _ = kv.PrettyPrint(mNormal)
 		fmt.Printf("%v\n", s)
 	},
 }
