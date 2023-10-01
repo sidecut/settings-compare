@@ -1,0 +1,9 @@
+{
+  "b:a": "bleah",
+  "b:c:d": "new-nested-value",
+  "b:c:e": "e",
+  "compound:key": "compound-value",
+  "delete-me": null,
+  "delete-me-2": "",
+  "top-level": "overridden-value"
+}
