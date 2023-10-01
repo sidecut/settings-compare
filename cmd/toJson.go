@@ -12,7 +12,7 @@ import (
 
 // toJsonCmd represents the toJson command
 var toJsonCmd = &cobra.Command{
-	Use:   "toJson",
+	Use:   "tojson",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
