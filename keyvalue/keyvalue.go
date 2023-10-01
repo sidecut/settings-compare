@@ -27,7 +27,7 @@ func ReadJsonMapFromFile(fname string) (map[string]interface{}, error) {
 }
 
 func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
-	keyValues := []KeyValue{}
+	var keyValues []KeyValue
 
 	for k, v := range m {
 		switch v.(type) {
