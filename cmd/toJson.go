@@ -36,7 +36,7 @@ var toJsonCmd = &cobra.Command{
 			panic(err)
 		}
 		s, _ := kv.PrettyPrint(mNormal)
-		fmt.Printf("%v\n", s)
+		fmt.Println(s)
 	},
 }
 

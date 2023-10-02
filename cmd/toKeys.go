@@ -31,7 +31,7 @@ var toKeysCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("%v\n", s)
+		fmt.Println(s)
 	},
 }
 

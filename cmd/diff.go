@@ -81,7 +81,7 @@ i.e. only news settings and changed settings will be output.`,
 			panic(err)
 		}
 		println(s)
-		fmt.Printf("%v\n", s)
+		fmt.Println(s)
 	},
 }
 
