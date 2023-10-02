@@ -68,14 +68,18 @@ i.e. only news settings and changed settings will be output.`,
 		}
 
 		println("\nDiffs as a JSON override file:")
-		println(kv.GetKeyValuesJson(diffs))
+		fm := kv.GetFlatMapFromKeyValues(diffs)
+		println(kv.PrettyPrint(fm))
 
 		println("\nNormalized JSON:")
-		mNormal, err := kv.MapFromKeyValues(diffs)
+		mNormal, err := kv.GetMapFromKeyValues(diffs)
 		if err != nil {
 			panic(err)
 		}
-		s, _ = kv.PrettyPrint(mNormal)
+		s, err = kv.PrettyPrint(mNormal)
+		if err != nil {
+			panic(err)
+		}
 		fmt.Printf("%v\n", s)
 	},
 }

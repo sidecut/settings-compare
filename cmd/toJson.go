@@ -26,12 +26,12 @@ var toJsonCmd = &cobra.Command{
 			panic(err)
 		}
 
-		kvs := kv.GetKeyValues(m, "")
+		kvs := kv.GetKeyValuesFromMap(m, "")
 		// log.Println("kvs1:")
 		// println(kv.PrettyPrint(kvs))
 		// println()
 
-		mNormal, err := kv.MapFromKeyValues(kvs)
+		mNormal, err := kv.GetMapFromKeyValues(kvs)
 		if err != nil {
 			panic(err)
 		}

@@ -26,8 +26,12 @@ var toKeysCmd = &cobra.Command{
 			panic(err)
 		}
 
-		kvs := kv.GetKeyValues(m, "")
-		println(kv.GetKeyValuesJson(kvs))
+		fm := kv.GetFlatMap(m, "")
+		s, err := kv.PrettyPrint(fm)
+		if err != nil {
+			panic(err)
+		}
+		cmd.Printf("%v\n", s)
 	},
 }
 

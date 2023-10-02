@@ -3,7 +3,6 @@ package keyvalue
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
@@ -26,7 +25,7 @@ func ReadJsonMapFromFile(fname string) (map[string]interface{}, error) {
 	return m, nil
 }
 
-func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
+func GetKeyValuesFromMap(m map[string]interface{}, prefix string) []KeyValue {
 	var keyValues []KeyValue
 
 	for k, v := range m {
@@ -36,7 +35,7 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 			keyValues = append(keyValues, KeyValue{prefix + k, v})
 		default:
 			// log.Printf("key:%s\t***value is an object, presumably a map\n", k)
-			childKeyValues := GetKeyValues(v.(map[string]interface{}), prefix+k+":")
+			childKeyValues := GetKeyValuesFromMap(v.(map[string]interface{}), prefix+k+":")
 			keyValues = append(keyValues, childKeyValues...)
 		}
 	}
@@ -45,7 +44,7 @@ func GetKeyValues(m map[string]interface{}, prefix string) []KeyValue {
 }
 
 func GetFlatMap(m map[string]interface{}, prefix string) map[string]interface{} {
-	kvs := GetKeyValues(m, prefix)
+	kvs := GetKeyValuesFromMap(m, prefix)
 
 	flatmap := make(map[string]interface{})
 	for _, kv := range kvs {
@@ -53,35 +52,18 @@ func GetFlatMap(m map[string]interface{}, prefix string) map[string]interface{} 
 	}
 
 	return flatmap
-
 }
 
-func GetKeyValuesJson(kvs []KeyValue) string {
-	// keys := getKeys(kvs)
-	// slices.Sort(keys)
-
+func GetFlatMapFromKeyValues(kvs []KeyValue) map[string]interface{} {
 	m := make(map[string]interface{})
 	for _, kv := range kvs {
 		m[kv.Key] = kv.Value
 	}
 
-	jsonBytes, err := json.MarshalIndent(m, "", "  ")
-	if err != nil {
-		log.Fatalf("Error marshaling json: %v", err)
-	}
-
-	return string(jsonBytes)
+	return m
 }
 
-// func getKeys(kvs []KeyValue) []string {
-// 	keys := make([]string, len(kvs))
-// 	for i, kv := range kvs {
-// 		keys[i] = kv.Key
-// 	}
-// 	return keys
-// }
-
-func MapFromKeyValues(kvs []KeyValue) (map[string]interface{}, error) {
+func GetMapFromKeyValues(kvs []KeyValue) (map[string]interface{}, error) {
 	m := make(map[string]interface{})
 	for _, kv := range kvs {
 		if err := putIntoMap(kv, m); err != nil {
