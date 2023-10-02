@@ -1,11 +1,12 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+
+	kv "settings-compare/keyvalue"
 
 	"github.com/spf13/cobra"
 )
@@ -13,15 +14,20 @@ import (
 // toKeysCmd represents the toKeys command
 var toKeysCmd = &cobra.Command{
 	Use:   "tokeys",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Convert a file to .NET user-secrets form, i.e. colons in keys",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("toKeys called")
+		if len(args) != 1 {
+			fmt.Println("toKeys requires exactly 1 argument")
+			return
+		}
+
+		m, err := kv.ReadJsonMapFromFile(args[0])
+		if err != nil {
+			panic(err)
+		}
+
+		kvs := kv.GetKeyValues(m, "")
+		println(kv.GetKeyValuesJson(kvs))
 	},
 }
 
