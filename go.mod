@@ -1,4 +1,4 @@
-module settings-compare
+module github.com/sidecut/settings-compare
 
 go 1.21
 

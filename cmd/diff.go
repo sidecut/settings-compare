@@ -7,8 +7,7 @@ import (
 	"fmt"
 	"log"
 
-	kv "settings-compare/keyvalue"
-
+	kv "github.com/sidecut/settings-compare/keyvalue"
 	"github.com/spf13/cobra"
 )
 

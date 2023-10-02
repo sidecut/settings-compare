@@ -6,8 +6,7 @@ package cmd
 import (
 	"fmt"
 
-	kv "settings-compare/keyvalue"
-
+	kv "github.com/sidecut/settings-compare/keyvalue"
 	"github.com/spf13/cobra"
 )
 
