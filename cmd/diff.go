@@ -67,23 +67,29 @@ i.e. only news settings and changed settings will be output.`,
 			}
 		}
 
-		println("\nDiffs as a JSON override file:")
-		fm := kv.GetFlatMapFromKeyValues(diffs)
-		println(kv.PrettyPrint(fm))
-
-		println("\nNormalized JSON:")
-		mNormal, err := kv.GetMapFromKeyValues(diffs)
-		if err != nil {
-			panic(err)
+		if *flatOutput {
+			fm := kv.GetFlatMapFromKeyValues(diffs)
+			s, err = kv.PrettyPrint(fm)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println(s)
+		} else if *jsonOutput {
+			mNormal, err := kv.GetMapFromKeyValues(diffs)
+			if err != nil {
+				panic(err)
+			}
+			s, err = kv.PrettyPrint(mNormal)
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println(s)
 		}
-		s, err = kv.PrettyPrint(mNormal)
-		if err != nil {
-			panic(err)
-		}
-		println(s)
-		fmt.Println(s)
 	},
 }
+
+var flatOutput *bool
+var jsonOutput *bool
 
 func init() {
 	rootCmd.AddCommand(diffCmd)
@@ -96,5 +102,6 @@ func init() {
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// diffCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	flatOutput = diffCmd.Flags().BoolP("flat", "f", false, "flat, i.e. colon-embedded, output")
+	jsonOutput = diffCmd.Flags().BoolP("json", "j", true, "json output")
 }
