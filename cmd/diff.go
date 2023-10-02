@@ -75,7 +75,6 @@ i.e. only news settings and changed settings will be output.`,
 		if err != nil {
 			panic(err)
 		}
-		println()
 		s, _ = kv.PrettyPrint(mNormal)
 		fmt.Printf("%v\n", s)
 	},
