@@ -1,0 +1,13 @@
+{
+  "a:a": "aa",
+  "a:b:a": "aba",
+  "b:a": "ba",
+  "b:b:a": "bba",
+  "compound:key": "compound-value",
+  "delete-me": "base value",
+  "delete-me-2": "base value 2",
+  "this-is-boolean": true,
+  "this-is-null": null,
+  "this-is-number": 123,
+  "top-level": "top-level-value"
+}
