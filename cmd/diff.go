@@ -57,11 +57,11 @@ i.e. only news settings and changed settings will be output.`,
 			if flatmap1[k2] != v2 {
 				if flatmap1[k2] == nil {
 					// Key not in base file
-					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, flatmap1[k2], v2)
+					println(fmt.Sprintf("key:%s\tvalue1:%s\tvalue2:%s", k2, flatmap1[k2], v2))
 					diffs = append(diffs, kv.KeyValue{Key: k2, Value: v2})
 				} else {
 					// Overridden key
-					fmt.Printf("key:%s\tvalue1:%s\tvalue2:%s\n", k2, flatmap1[k2], v2)
+					println(fmt.Sprintf("key:%s\tvalue1:%s\tvalue2:%s", k2, flatmap1[k2], v2))
 					diffs = append(diffs, kv.KeyValue{Key: k2, Value: v2})
 				}
 			}
@@ -80,6 +80,7 @@ i.e. only news settings and changed settings will be output.`,
 		if err != nil {
 			panic(err)
 		}
+		println(s)
 		fmt.Printf("%v\n", s)
 	},
 }
